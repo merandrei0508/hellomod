@@ -1,0 +1,51 @@
+From 24063aba7d9d43e83b00a23599f2d6e2c9439685 Mon Sep 17 00:00:00 2001
+From: merandrei0508 <merandrei0508@gmail.com>
+Date: Mon, 18 Jul 2016 16:05:53 +0300
+Subject: [PATCH] modul-meran.c
+
+---
+ modul-meran.c | 34 ++++++++++++++++++++--------------
+ 1 file changed, 20 insertions(+), 14 deletions(-)
+
+diff --git a/modul-meran.c b/modul-meran.c
+index 73c79c4..c62a9bf 100644
+--- a/modul-meran.c
++++ b/modul-meran.c
+@@ -1,14 +1,20 @@
+-#include <linux/init.h>
+-#include <linux/module.h>
+-MODULE_LICENSE("Dual BSD/GPL");
+-static int hello_init(void)
+-{
+-    printk(KERN_ALERT "Hello, world\n");
+-    return 0;
+-}
+-static void hello_exit(void)
+-{
+-    printk(KERN_ALERT "Goodbye, cruel world\n");
+-}
+-module_init(hello_init);
+-module_exit(hello_exit);
++#include <linux/init.h>
++#include <linux/module.h>
++
++static int hello_init(void)
++{
++	pr_debug("Hello, world\n");
++
++	/*
++	 * A non 0 return means init_module failed; module can't be loaded.
++	 */
++	return 0;
++}
++
++static void hello_exit(void)
++{
++	pr_debug("Goodbye, cruel world\n");
++}
++
++module_init(hello_init);
++module_exit(hello_exit);
+-- 
+2.7.4
+
